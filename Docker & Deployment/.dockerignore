@@ -1,0 +1,58 @@
+# .dockerignore
+# Version control
+.git
+.gitignore
+.gitattributes
+
+# Python artifacts
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# Environment files (NEVER bake secrets into image)
+.env
+.env.*
+!.env.example
+
+# Testing & coverage
+.pytest_cache/
+.coverage
+htmlcov/
+tests/
+*.test.py
+
+# IDE & OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# Docker files (no need to copy back in)
+docker-compose*.yml
+Dockerfile*
+.dockerignore
+
+# Docs & CI (not needed at runtime)
+README.md
+docs/
+.github/
+nginx/
+
+# Large ML model caches (download at runtime or mount as volume)
+*.bin
+*.safetensors
+*.onnx
+outputs/

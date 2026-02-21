@@ -1,0 +1,96 @@
+# docker-compose.yml
+version: "3.9"
+
+# ─────────────────────────────────────────────
+# CitizenAI — Full Stack Compose
+# Services: app | mongodb | nginx
+# ─────────────────────────────────────────────
+
+services:
+  # ── Flask Application ───────────────────────
+  app:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+      # dockerfile: Docker & Deployment/Dockerfile
+      target: runtime
+    image: citizenai-app:latest
+    container_name: citizenai_app
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      - FLASK_ENV=${FLASK_ENV:-production}
+      - MONGO_URI=mongodb://mongo:27017/citizenai
+      - PORT=5000
+    ports:
+      - "5000:5000"
+    depends_on:
+      mongo:
+        condition: service_healthy
+    networks:
+      - citizenai_net
+    volumes:
+      - nltk_data:/root/nltk_data   # Persist NLTK downloads
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/ping-db"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 15s
+
+  # ── MongoDB ──────────────────────────────────
+  mongo:
+    image: mongo:7.0
+    container_name: citizenai_mongo
+    restart: unless-stopped
+    environment:
+      - MONGO_INITDB_DATABASE=citizenai
+    ports:
+      - "27017:27017"   # Remove in production; expose only internally
+    networks:
+      - citizenai_net
+    volumes:
+      - mongo_data:/data/db
+      - mongo_config:/data/configdb
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  # ── Nginx Reverse Proxy ──────────────────────
+  nginx:
+    image: nginx:1.25-alpine
+    container_name: citizenai_nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - app
+    networks:
+      - citizenai_net
+    volumes:
+      # - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      # - ./nginx/conf.d:/etc/nginx/conf.d:ro
+      - ../nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ../nginx/conf.d:/etc/nginx/conf.d:ro
+      - nginx_logs:/var/log/nginx
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost/ping-db"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+# ─────────────────────────────────────────────
+networks:
+  citizenai_net:
+    driver: bridge
+
+volumes:
+  mongo_data:
+  mongo_config:
+  nltk_data:
+  nginx_logs:

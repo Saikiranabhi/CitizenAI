@@ -1,0 +1,20 @@
+# Environment files
+.env
+.env.*
+*/.env
+*/.env.*
+
+# Ignore env in any folder (including Docker & Deployment)
+Docker & Deployment/.env
+docker-deployment/.env
+
+# Python
+__pycache__/
+*.pyc
+
+# Virtual environment
+venv/
+.envrc
+
+# Ignore specific env example file
+Config/.env.example
