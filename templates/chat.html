@@ -1,4 +1,3 @@
-# chat.html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,200 +5,132 @@
     <title>Chat - CitizenAI</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 </head>
 
-<body class="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
-    <!-- Header -->
-    <header class="backdrop-blur-md bg-white/70 border-b border-gray-200/50 sticky top-0 z-50 shadow-sm">
-        <div class="max-w-5xl mx-auto px-4 py-4">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center space-x-3">
-                    <div class="w-10 h-10 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path>
-                        </svg>
-                    </div>
-                    <div>
-                        <h1 class="text-xl font-bold text-gray-900">AI Assistant</h1>
-                        <p class="text-xs text-gray-500">Powered by CitizenAI</p>
-                    </div>
-                </div>
-                
-                <div class="flex items-center space-x-3">
-                    <a href="{{ url_for('dashboard_bp.dashboard') }}" class="px-4 py-2 text-gray-700 hover:text-blue-600 font-medium transition">
-                        Dashboard
-                    </a>
-                    <a href="{{ url_for('index') }}" class="px-4 py-2 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-lg font-medium transition transform hover:scale-105">
-                        Home
-                    </a>
-                </div>
+<body class="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 flex flex-col">
+
+<header class="backdrop-blur-md bg-white/70 border-b border-gray-200 sticky top-0 z-50 shadow-sm">
+    <div class="max-w-5xl mx-auto px-4 py-4 flex justify-between items-center">
+        <div class="flex items-center space-x-3">
+            <div class="w-10 h-10 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                    d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path>
+                </svg>
+            </div>
+            <div>
+                <h1 class="text-xl font-bold text-gray-900">AI Assistant</h1>
+                <p class="text-xs text-gray-500">Powered by CitizenAI</p>
             </div>
         </div>
-    </header>
 
-    <!-- Main Content -->
-    <main class="max-w-4xl mx-auto px-4 py-8">
-        <!-- Chat Container -->
-        <div class="bg-white rounded-2xl shadow-2xl overflow-hidden">
-            <!-- Chat Messages Area -->
-            <div class="p-6 space-y-6 min-h-[400px]">
-                {% if question and question_response %}
-                <!-- User Message -->
-                <div class="flex justify-end">
-                    <div class="max-w-[80%]">
-                        <div class="bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-2xl rounded-tr-sm px-6 py-3 shadow-lg">
-                            <p class="font-medium">{{ question }}</p>
-                        </div>
-                        <p class="text-xs text-gray-500 mt-1 text-right">You • Just now</p>
+        <div class="flex items-center space-x-3">
+            <a href="{{ url_for('dashboard_bp.dashboard') }}" class="px-4 py-2 text-gray-700 hover:text-blue-600 font-medium">
+                Dashboard
+            </a>
+            <a href="{{ url_for('index') }}" class="px-4 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg font-medium">
+                Home
+            </a>
+        </div>
+    </div>
+</header>
+
+<main class="flex-1 flex items-center justify-center px-4 py-8">
+    <div class="w-full max-w-4xl bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col">
+
+        <!-- Messages -->
+        <div class="flex-1 p-6 space-y-6 min-h-[500px] max-h-[500px] overflow-y-auto">
+
+            {% if question_response %}
+
+            <!-- User -->
+            <div class="flex justify-end">
+                <div class="max-w-[75%]">
+                    <div class="bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-2xl rounded-tr-sm px-6 py-3">
+                        {{ question }}
                     </div>
+                    <p class="text-xs text-gray-500 mt-1 text-right">You • Just now</p>
                 </div>
-                
-                <!-- AI Response -->
-                <div class="flex justify-start">
-                    <div class="max-w-[80%]">
-                        <div class="bg-gray-100 rounded-2xl rounded-tl-sm px-6 py-4 shadow-md">
-                            <div class="flex items-center mb-2">
-                                <div class="w-6 h-6 bg-gradient-to-br from-blue-600 to-purple-600 rounded-full mr-2"></div>
-                                <span class="font-semibold text-gray-900">AI Assistant</span>
-                            </div>
-                            <div class="prose max-w-none">
-                                {% for line in question_response.split('\n') %}
-                                {% if line.strip() %}
-                                <p class="mb-2 text-gray-800">{{ line.strip() }}</p>
-                                {% endif %}
-                                {% endfor %}
-                            </div>
-                        </div>
-                        <p class="text-xs text-gray-500 mt-1">AI • Just now</p>
-                    </div>
-                </div>
-                
-                <!-- Feedback Form -->
-                <div class="border-t pt-6 mt-6">
-                    <h3 class="text-lg font-bold text-gray-900 mb-4">How was this response?</h3>
-                    <form method="POST" action="{{ url_for('sentiment_bp.sentiment') }}" class="space-y-4">
-                        <input type="hidden" name="question" value="{{ question }}">
-                        <input type="hidden" name="response" value="{{ question_response }}">
-                        
-                        <div>
-                            <label for="feedback" class="block text-sm font-semibold text-gray-700 mb-2">Your Feedback</label>
-                            <textarea 
-                                name="feedback" 
-                                id="feedback"
-                                rows="3" 
-                                required
-                                placeholder="Share your thoughts about this response..."
-                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition outline-none resize-none"
-                            ></textarea>
-                        </div>
-                        
-                        <button 
-                            type="submit" 
-                            class="px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white rounded-xl font-semibold shadow-lg transition transform hover:scale-105"
-                        >
-                            Submit Feedback
-                        </button>
-                    </form>
-                </div>
-                {% else %}
-                <!-- Empty State -->
-                <div class="text-center py-12">
-                    <div class="w-20 h-20 bg-gradient-to-br from-blue-100 to-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <svg class="w-10 h-10 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path>
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-2">Start a Conversation</h3>
-                    <p class="text-gray-600">Ask me anything about civic services, policies, or get help with issues</p>
-                </div>
-                {% endif %}
-                
-                {% if sentiment %}
-                <!-- Sentiment Result -->
-                <div class="p-6 bg-gradient-to-r from-yellow-50 to-orange-50 border-2 border-yellow-200 rounded-2xl">
-                    <div class="flex items-center">
-                        <div class="w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center mr-4">
-                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                            </svg>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-gray-900">Feedback Received!</h4>
-                            <p class="text-gray-700">Sentiment: <span class="font-semibold">{{ sentiment }}</span></p>
-                        </div>
-                    </div>
-                </div>
-                {% endif %}
             </div>
 
-            <!-- Input Area -->
-            <div class="border-t border-gray-200 bg-gray-50 p-6">
-                <form action="" method="POST" class="flex gap-3">
-                    <input 
-                        type="text" 
-                        id="question" 
-                        name="question" 
-                        required 
-                        placeholder="Type your question here..." 
-                        value="{{ question if not question_response else '' }}"
-                        class="flex-1 px-6 py-4 border-2 border-gray-200 rounded-2xl focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition outline-none text-lg"
-                    >
+            <!-- AI -->
+            <div class="flex justify-start">
+                <div class="max-w-[75%]">
+                    <div class="bg-gray-100 rounded-2xl rounded-tl-sm px-6 py-4 shadow">
+                        <div class="font-semibold mb-2 text-gray-900">AI Assistant</div>
+                        {% for line in question_response.split('\n') %}
+                            {% if line.strip() %}
+                                <p class="text-gray-800 mb-2">{{ line.strip() }}</p>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <p class="text-xs text-gray-500 mt-1">AI • Just now</p>
+                </div>
+            </div>
+
+            <!-- Feedback Form -->
+            <div class="border-t pt-6 mt-6">
+                <h3 class="text-lg font-bold text-gray-900 mb-4">How was this response?</h3>
+
+                <form method="POST" action="{{ url_for('sentiment_bp.sentiment') }}" class="space-y-4">
+                    <input type="hidden" name="question" value="{{ question }}">
+                    <input type="hidden" name="response" value="{{ question_response }}">
+
+                    <textarea 
+                        name="feedback"
+                        rows="3"
+                        required
+                        placeholder="Share your feedback..."
+                        class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:ring-4 focus:ring-blue-100 outline-none resize-none"
+                    ></textarea>
+
                     <button 
-                        type="submit" 
-                        class="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-2xl font-bold shadow-lg transition transform hover:scale-105 active:scale-95 flex items-center"
-                    >
-                        <span class="mr-2">Send</span>
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
-                        </svg>
+                        type="submit"
+                        class="px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-xl font-semibold hover:scale-105 transition">
+                        Submit Feedback
                     </button>
                 </form>
-                
-                <p class="text-xs text-gray-500 mt-3 text-center">
-                    AI responses may contain errors. Always verify important information.
-                </p>
             </div>
+
+            {% else %}
+
+            <!-- Empty State -->
+            <div class="flex flex-col items-center justify-center h-full text-center">
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Start a Conversation</h3>
+                <p class="text-gray-600">Ask anything about civic services or policies.</p>
+            </div>
+
+            {% endif %}
+
+            {% if sentiment %}
+            <div class="p-5 bg-yellow-50 border border-yellow-200 rounded-xl">
+                <p class="font-semibold text-gray-900">Feedback Received!</p>
+                <p class="text-gray-700 text-sm">Sentiment: {{ sentiment }}</p>
+            </div>
+            {% endif %}
+
         </div>
 
-        <!-- Quick Actions -->
-        <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
-            <button class="p-4 bg-white rounded-xl shadow-md hover:shadow-lg transition border border-gray-200 text-left group">
-                <div class="flex items-center mb-2">
-                    <div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center mr-3 group-hover:bg-blue-200 transition">
-                        <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
-                    </div>
-                    <span class="font-semibold text-gray-900">Public Services</span>
-                </div>
-                <p class="text-sm text-gray-600">Get info about available services</p>
-            </button>
-            
-            <button class="p-4 bg-white rounded-xl shadow-md hover:shadow-lg transition border border-gray-200 text-left group">
-                <div class="flex items-center mb-2">
-                    <div class="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center mr-3 group-hover:bg-purple-200 transition">
-                        <svg class="w-4 h-4 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
-                        </svg>
-                    </div>
-                    <span class="font-semibold text-gray-900">Report Issue</span>
-                </div>
-                <p class="text-sm text-gray-600">Report problems or complaints</p>
-            </button>
-            
-            <button class="p-4 bg-white rounded-xl shadow-md hover:shadow-lg transition border border-gray-200 text-left group">
-                <div class="flex items-center mb-2">
-                    <div class="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center mr-3 group-hover:bg-green-200 transition">
-                        <svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                        </svg>
-                    </div>
-                    <span class="font-semibold text-gray-900">View Policies</span>
-                </div>
-                <p class="text-sm text-gray-600">Access government policies</p>
-            </button>
+        <!-- Input -->
+        <div class="border-t bg-gray-50 p-6">
+            <form method="POST" class="flex items-center gap-3">
+                <input 
+                    type="text"
+                    name="question"
+                    required
+                    placeholder="Type your question here..."
+                    class="flex-1 px-6 py-4 border-2 border-gray-200 rounded-2xl focus:border-blue-500 focus:ring-4 focus:ring-blue-100 outline-none text-lg"
+                >
+                <button 
+                    type="submit"
+                    class="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-2xl font-bold hover:scale-105 transition">
+                    Send
+                </button>
+            </form>
         </div>
-    </main>
+
+    </div>
+</main>
+
 </body>
 </html>

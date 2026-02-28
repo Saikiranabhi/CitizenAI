@@ -17,4 +17,4 @@ venv/
 .envrc
 
 # Ignore specific env example file
-Config/.env.example
+Config/.env
