@@ -2,24 +2,19 @@
 # ── Web Framework ──────────────────────────────
 Flask==2.3.3
 Werkzeug==3.0.3
-gunicorn==21.2.0              # Production WSGI server
+gunicorn==21.2.0
 
 # ── Database ───────────────────────────────────
 Flask-PyMongo==2.3.0
-pymongo==4.6.1
+pymongo[srv]==4.6.1
+dnspython
 
 # ── Authentication ──────────────────────────────
 Flask-Dance[google]==7.0.1
 
 # ── AI / ML ─────────────────────────────────────
-google-generativeai
-huggingface-hub==0.23.2
-transformers>=4.41.0
-accelerate>=0.30.0
-torch>=2.2.0
-torchvision
-torchaudio
-bitsandbytes
+google-genai>=0.8.0
+groq
 
 # ── NLP / Sentiment ──────────────────────────────
 nltk
@@ -28,11 +23,3 @@ nltk
 python-dotenv==1.0.1
 requests
 numpy<2
-
-# ── Dev / Testing (install separately in CI) ──────
-# pytest
-# pytest-cov
-# flake8
-
-google-genai
-groq
