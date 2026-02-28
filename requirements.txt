@@ -33,3 +33,6 @@ numpy<2
 # pytest
 # pytest-cov
 # flake8
+
+google-genai
+groq
