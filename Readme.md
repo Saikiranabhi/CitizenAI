@@ -56,9 +56,6 @@ Think of CitizenAI as a digital assistant for public service—just like a chatb
 - 📈 **Real-time insights** with sentiment analysis and feedback analytics
 
 ### Key Statistics
-
-- 🎯 **12,000+** Active Users
-- ✅ **3,500+** Issues Resolved
 - 😊 **99%** User Satisfaction Rate
 
 ---
