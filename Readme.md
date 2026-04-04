@@ -98,7 +98,7 @@ Think of CitizenAI as a digital assistant for public service—just like a chatb
 | **Backend** | Python 3.11, Flask, Gunicorn |
 | **Frontend** | Tailwind CSS, Lottie Animations, Chart.js |
 | **Database** | MongoDB 7.0 |
-| **AI/ML** | Google Gemini API, IBM Granite, NLTK (VADER) |
+| **AI/ML** | Google Gemini API,Groq API, Ollama TinyLLm, Flan-T5 Offline, NLTK (VADER) |
 | **DevOps** | Docker, Docker Compose, Nginx |
 | **CI/CD** | GitHub Actions |
 | **Authentication** | Flask-Dance (OAuth), Werkzeug (Password Hashing) |
