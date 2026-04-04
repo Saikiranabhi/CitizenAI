@@ -19,6 +19,12 @@ groq
 # ── NLP / Sentiment ──────────────────────────────
 nltk
 
+# ── Offline Fallback (Flan-T5) ───────────────────
+transformers>=4.35.0
+torch>=2.0.0
+accelerate>=0.20.0
+sentencepiece
+
 # ── Utilities ────────────────────────────────────
 python-dotenv==1.0.1
 requests
