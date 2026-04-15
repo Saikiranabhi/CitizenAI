@@ -2,7 +2,6 @@
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" width="60"/>
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg" width="60"/>
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" width="60"/>
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg" width="60"/>
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" width="60"/>
 
 # 🚀 CitizenAI
@@ -14,7 +13,7 @@
 [![Docker](https://img.shields.io/badge/docker-ready-brightgreen.svg)](https://www.docker.com/)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
 
-[Live Demo](#) · [Documentation](#-documentation) · [Report Bug](https://github.com/yourusername/citizenai/issues) · [Request Feature](https://github.com/yourusername/citizenai/issues)
+  [Documentation](#-documentation) · [Report Bug](https://github.com/Saikiranabhi/citizenai/issues) · [Request Feature](https://github.com/Saikiranabhi/citizenai/issues)
 
 </div>
 
