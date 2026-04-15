@@ -424,8 +424,8 @@ For complete design documentation, see **[FRONTEND_DESIGN.md](FRONTEND_DESIGN.md
 
 ```bash
 docker build -t citizenai:latest .
-docker tag citizenai:latest ghcr.io/yourusername/citizenai:latest
-docker push ghcr.io/yourusername/citizenai:latest
+docker tag citizenai:latest ghcr.io/Saikiranabhi/citizenai:latest
+docker push ghcr.io/Saikiranabhi/citizenai:latest
 ```
 
 #### 2️⃣ Deploy to Server
@@ -559,7 +559,7 @@ We welcome contributions! Please follow these steps:
 ### 1️⃣ Fork the Repository
 
 ```bash
-git clone https://github.com/yourusername/citizenai.git
+git clone https://github.com/Saikiranabhi/citizenai.git
 cd citizenai
 git checkout -b feature/your-feature-name
 ```
@@ -624,12 +624,6 @@ in the Software without restriction...
 - [LottieFiles](https://lottiefiles.com/) - Animations
 - [Docker](https://www.docker.com/) - Containerization
 
-### Contributors
-
-<a href="https://github.com/yourusername/citizenai/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=yourusername/citizenai" />
-</a>
-
 ### Special Thanks
 
 - OpenAI for AI development inspiration
@@ -641,9 +635,9 @@ in the Software without restriction...
 ## 📞 Contact & Support
 
 - **Website**: [https://citizenai.example.com](https://citizenai.example.com)
-- **Email**: support@citizenai.example.com
-- **Issues**: [GitHub Issues](https://github.com/yourusername/citizenai/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/yourusername/citizenai/discussions)
+- **Email**: saikirantungana@gmail.com
+- **Issues**: [GitHub Issues](https://github.com/Saikiranabhi/citizenai/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/Saikiranabhi/citizenai/discussions)
 
 ---
 
@@ -651,7 +645,7 @@ in the Software without restriction...
 
 ### ⭐ Star this repo if you find it helpful!
 
-Made with ❤️ by the CitizenAI Team
+Made with ❤️ by the Sai Kiran Tungana
 
 [Back to Top](#-citizenai)
 
